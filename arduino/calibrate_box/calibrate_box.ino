@@ -3,6 +3,8 @@
  for Codasign
  March 2014
  
+ Opens and closes box on loop.
+ 
  Components
  servo on Pin 9
  */

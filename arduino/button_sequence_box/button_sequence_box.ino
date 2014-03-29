@@ -1,19 +1,22 @@
-/* One Button Box
+/* Button Sequence Box
  by Becky Stewart 
  for Codasign
  March 2014
  
- Press the button to open the box.
+ Hold down the right buttons in order
+ to open the box.
  
  Components
  servo on Pin 9
- button on Pin 10
+ button on Pins 10-12
  */
 
 #include <Servo.h> 
 
 int boxPin = 9;
-int buttonPin = 10;
+int buttonPin1 = 10;
+int buttonPin2 = 11;
+int buttonPin3 = 12;
 
 Servo boxServo;
 int openPos = 100; // adjust this number
@@ -24,7 +27,9 @@ int boxOpen;      // whether box is open or closed
 void setup() {
   // set up the pin modes
   pinMode( boxPin, OUTPUT );
-  pinMode( buttonPin, INPUT_PULLUP );
+  pinMode( buttonPin1, INPUT_PULLUP );
+  pinMode( buttonPin2, INPUT_PULLUP );
+  pinMode( buttonPin3, INPUT_PULLUP );
 
   boxServo.attach(9);
 
@@ -34,9 +39,14 @@ void setup() {
 
 // loop runs repeatedly
 void loop() {
-  int buttonState = digitalRead( buttonPin );
+  // read in states of buttons
+  int buttonState1 = digitalRead( buttonPin1 );
+  int buttonState2 = digitalRead( buttonPin2 );
+  int buttonState3 = digitalRead( buttonPin3 );
 
-  if( buttonState == 0 ) {
+  if( buttonState1 == 0 && 
+      buttonState2 == 1 &&
+      buttonState3 == 1) {
     Serial.println("open the box");
     openBox();
   }
